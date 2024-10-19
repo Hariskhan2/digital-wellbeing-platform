@@ -9,9 +9,15 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
+// Import routes
 const authRoutes = require('./routes/auth');
-app.use('/api/auth', authRoutes);
+const adminRoutes = require('./routes/admin'); // Admin routes
+const protectedRoutes = require('./routes/protectedRoutes'); // Protected routes
 
+// Use routes
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes); // Admin routes under /api/admin
+// app.use('/api/protected', protectedRoutes); // Protected routes under /api/protected
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
